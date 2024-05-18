@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Database credentials
-$servername = "127.0.0.1:4306";
+$servername = "127.0.0.1";
 $username = "root1";
 $password = "sajidsajid123456789";
 $dbname = "certificate_db";
@@ -12,7 +12,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die(json_encode(['error' => 'Connection failed: ' . $conn->connect_error]));
+    echo json_encode(['error' => 'Connection failed: ' . $conn->connect_error]);
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,8 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $stmt->close();
+} else {
+    echo json_encode(['error' => 'Invalid request method']);
 }
 
 $conn->close();
 ?>
-
