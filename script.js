@@ -9,13 +9,14 @@ document.getElementById('verify-form').addEventListener('submit', function(e) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: `reg_number=${regNumber}`
+        body: `reg_number=${encodeURIComponent(regNumber)}`
     })
     .then(response => response.json())
     .then(data => {
         resultDiv.style.display = 'block';
+        resultDiv.classList.remove('hidden');
         if (data.error) {
-            resultDiv.innerHTML = `<p style="color: red;">${data.error}</p>`;
+            resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
         } else {
             resultDiv.innerHTML = `
                 <h2>CEC STUDENT RECORD VERIFIED</h2>
@@ -43,7 +44,8 @@ document.getElementById('verify-form').addEventListener('submit', function(e) {
     })
     .catch(error => {
         resultDiv.style.display = 'block';
-        resultDiv.innerHTML = `<p style="color: red;">An error occurred</p>`;
+        resultDiv.classList.remove('hidden');
+        resultDiv.innerHTML = `<p class="error">An error occurred</p>`;
         console.error('Error:', error);
     });
 });
