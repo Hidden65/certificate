@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Database credentials
-$servername = "127.0.0.1";
+$servername = "127.0.0.1:4306";
 $username = "root1";
 $password = "sajidsajid123456789";
 $dbname = "certificate_db";
